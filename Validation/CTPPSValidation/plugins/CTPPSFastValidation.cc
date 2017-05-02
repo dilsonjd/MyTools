@@ -57,10 +57,10 @@ Implementation:
 
 #include "FWCore/ServiceRegistry/interface/Service.h"
 #include "CommonTools/UtilAlgos/interface/TFileService.h"
-#include "DataFormats/CTPPSReco/interface/CTPPSFastRecHit.h"
-#include "DataFormats/CTPPSReco/interface/CTPPSFastRecHitContainer.h"
-#include "DataFormats/CTPPSReco/interface/CTPPSFastTrack.h"
-#include "DataFormats/CTPPSReco/interface/CTPPSFastTrackContainer.h"
+#include "FastSimDataFormats/CTPPSFastSim/interface/CTPPSFastRecHit.h"
+#include "FastSimDataFormats/CTPPSFastSim/interface/CTPPSFastRecHitContainer.h"
+#include "FastSimDataFormats/CTPPSFastSim/interface/CTPPSFastTrack.h"
+#include "FastSimDataFormats/CTPPSFastSim/interface/CTPPSFastTrackContainer.h"
 #include <vector>
 //
 // class declaration
@@ -346,11 +346,11 @@ CTPPSFastValidation::analyze(const edm::Event& iEvent, const edm::EventSetup& iS
             h_LHCT_vz_GPV->Fill(vertex.z());
             if(tracksPPS.isValid()) {
                 for (itTracksPPS = tracksPPS->begin(); itTracksPPS != tracksPPS->end(); ++itTracksPPS) {
-                    if(itTracksPPS->PZ()>0&&proton->Pz()>0) {
+                    if(itTracksPPS->pz()>0&&proton->Pz()>0) {
                         contTracksP++;
-                        hx0_trk->Fill(itTracksPPS->X0());
-                        hy0_trk->Fill(itTracksPPS->Y0());
-                        hip->Fill(sqrt(itTracksPPS->X0()*itTracksPPS->X0()+itTracksPPS->Y0()*itTracksPPS->Y0()));
+                        hx0_trk->Fill(itTracksPPS->x0());
+                        hy0_trk->Fill(itTracksPPS->y0());
+                        hip->Fill(sqrt(itTracksPPS->x0()*itTracksPPS->x0()+itTracksPPS->y0()*itTracksPPS->y0()));
                         ht_ARMF_trk->Fill(itTracksPPS->t());
                         hxi_ARMF_trk->Fill(itTracksPPS->xi());
                         xiPPSArmF = itTracksPPS->xi();
@@ -358,11 +358,11 @@ CTPPSFastValidation::analyze(const edm::Event& iEvent, const edm::EventSetup& iS
                         ht_ARMF_genreco->Fill(t,itTracksPPS->t());
                         hxi_ARMF_genreco->Fill(xi,itTracksPPS->xi());
                     }
-                    if(itTracksPPS->PZ()<0&&proton->Pz()<0) {
+                    if(itTracksPPS->pz()<0&&proton->Pz()<0) {
                         contTracksN++;
-                        hx0_trk->Fill(itTracksPPS->X0());
-                        hy0_trk->Fill(itTracksPPS->Y0());
-                        hip->Fill(sqrt(itTracksPPS->X0()*itTracksPPS->X0()+itTracksPPS->Y0()*itTracksPPS->Y0()));
+                        hx0_trk->Fill(itTracksPPS->x0());
+                        hy0_trk->Fill(itTracksPPS->y0());
+                        hip->Fill(sqrt(itTracksPPS->x0()*itTracksPPS->x0()+itTracksPPS->y0()*itTracksPPS->y0()));
                         ht_ARMB_trk->Fill(itTracksPPS->t());
                         hxi_ARMB_trk->Fill(itTracksPPS->xi());
                         xiPPSArmB = itTracksPPS->xi();
